@@ -35,16 +35,21 @@ int **ways(int *all, int dots) {
     char *city[] = {"A", "B", "C", "D", "E"}; 
     char **res_char = NULL;
     res_char = (char **)malloc(sizeof(char *) * 5);
+     for(int i = 0; i < 5; i++) {
+        res_char[i] = (char *)malloc(sizeof(char) * 200);
+        res_char[i] = city[i];
+    }
     int index[] = {0, 1, 2, 3, 4};
     for(int i = 0, j = 0; i < 5; i++) {
-        res_char[i] = city[ind];
+        res_char[i] = mx_strjoin(city[ind], res_char[i]);
         for(int m = 0, min = 50000; m < 5; m++){
             if (ways_x[ind][m] < min) {
                 min = ways_x[ind][m];
                 j = m;
             }
         }
-        *res_char[i] = *mx_strjoin(res_char[j], " - ");
+        // printf("%s", res_char[i]);
+        res_char[i] = mx_strjoin(res_char[i], res_char[j]);
         // res_char[i] = mx_strjoin(res_char[i], city[j]);
     }
     for(int i = 0; i < 5; i++) {
