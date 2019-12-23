@@ -1,18 +1,23 @@
-#ifndef LIBMX_H
-#define LIBMX_H
+#ifndef PATHFINDER_H
+#define PATHFINDER_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <wchar.h>
-#include<fcntl.h>
+#include "libmx/inc/libmx.h"
 
-// Utils pack
+typedef struct t_data {
+    int cityes;
+    int size_arr;
+    int **matrix;
+    char **pA;
+    t_dey *dey;
+} t_data;
+
+void mx_print_error(enum e_eror errors, char **a, int i);
+void mx_printerr(const char *s);
 
 void mx_printchar(char c);
 void mx_print_unicode(wchar_t c);
 void mx_printstr(const char *s);
-void mx_print_strarr(char **arr, const char *delim);
+void mx_print_strarr(char **arr);
 void mx_printint(int n);
 double mx_pow(double n, unsigned int pow);
 int mx_sqrt(int x);

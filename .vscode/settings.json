@@ -1,0 +1,7 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "libmx.h": "c",
+        "pathfinder.h": "c"
+    }
+}
