@@ -21,8 +21,3 @@ char *mx_file_to_str(const char *file) {
    close(fd);
    return str;
 }
-
-
-// int main() {
-
-// }

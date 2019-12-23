@@ -1,55 +1,18 @@
-#ifndef PATHFINDER_H
-#define PATHFINDER_H
+#ifndef LIBMX_H
+#define LIBMX_H
 
-#include "libmx/inc/libmx.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <wchar.h>
+#include<fcntl.h>
 
-#define ERROR_USAGE "usage: ./pathfinder [filename]\n"
-#define ERROR_FILE "error: file "
-#define ERROR_EXIST " does not exist\n"
-#define ERROR_EMPTY " is empty\n"
-#define ERROR_LINE "error: line "
-#define ERROR_INVALID " is not valid\n"
-#define ERROR_LOGIC "error: invalid number of islands\n"
-#define DELIM_LINE "========================================\n"
-
-typedef struct s_rec {
-    int p;
-    int o;
-    int i;
-    int s;
-} t_rec;
-
-typedef struct s_dey {
-    int *l;
-    int **f;
-    int *t;
-} t_dey;
-
-typedef struct s_data {
-    int cityes;
-    int size_arr;
-    int **matrix;
-    char **pA;
-    t_dey *dey;
-} t_data;
-
-typedef enum e_error {
-    INVALID_ARGUMENTS_COUNT,
-    FILE_DOES_NOT_EXISTS,
-    FILE_IS_EMPTY,
-    INVALID_FIRST_LINE,
-    INVALID_LINE,
-    INVALID_ISLANDS_COUNT
-} t_error;
-
-
-void mx_print_error(char *str1, char *str2, char *str3);
-void mx_printerr(const char *s);
+// Utils pack
 
 void mx_printchar(char c);
 void mx_print_unicode(wchar_t c);
 void mx_printstr(const char *s);
-void mx_print_strarr(char **arr);
+void mx_print_strarr(char **arr, const char *delim);
 void mx_printint(int n);
 double mx_pow(double n, unsigned int pow);
 int mx_sqrt(int x);
@@ -102,6 +65,13 @@ void *mx_memrchr(const void *s, int c, size_t n);
 void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len);
 void *mx_memmove(void *dst, const void *src, size_t len);
 void *mx_realloc(void *ptr, size_t size);
+
+// List pack
+
+typedef struct  s_list {
+    void  *data;
+    struct s_list *next;
+}         t_list;
 
 t_list  *mx_create_node(void *data);
 void mx_push_front(t_list **list, void *data);

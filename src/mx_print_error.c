@@ -1,23 +1,13 @@
 #include "pathfinder.h"
 
-void mx_print_error(enum e_eror errors, char **a, int i) {
-    if (errors == INVALID_NUMBER) {
-        mx_printerr("usage: ./pathfinder [filename]\n");
-    } else if (errors == NOT_EXIST) {
-        mx_printerr("error: file ");
-        mx_printerr(a[1]);
-        mx_printerr(" doesn't exist\n");
-    } else if (errors == EMPTY) {
-        mx_printerr("error: file ");
-        mx_printerr(a[1]);
-        mx_printerr(" is empty\n");
-    } else if (errors == LINE1_INVALID) {
-            mx_printerr("error: line 1 isn't valid\n");
-    } else if (errors == LINE_INVALID) {
-        mx_printerr("error: line ");
-        mx_printerr(mx_itoa(i + 1));
-        mx_printerr(" isn't valid\n");
-    } else if (errors == ISLANDS_INVALID)
-        mx_printerr("error: invalid number of islands\n");
-    exit(1);
+void mx_print_error(char *str1, char *str2, char *str3) {
+    if (str2 == NULL || str3 == NULL) {
+        write(2, str1, mx_strlen(str1));
+    }
+    else {
+        write(2, str1, mx_strlen(str1));
+        write(2, str2, mx_strlen(str2));
+        write(2, str3, mx_strlen(str3));
+    }
+    exit(0);
 }
