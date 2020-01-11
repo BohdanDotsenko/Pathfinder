@@ -1,31 +1,20 @@
-#include"libmx.h"
+#include "libmx.h"
 
 char *mx_strtrim(const char *str) {
-    char *result;
-    int start = 0;
-    int finish = mx_strlen(str) - 1;
+	int len;
+	char *dst = NULL;
 
-    if(!str)
-        return NULL;
-    while(mx_isspace(str[start])){
-        start++;
+	if (!str)
+		return NULL;
+	len = mx_strlen(str);
+	while(mx_isspace(str[len-1]) && len > 0) {
+        len--;
     }
-    while(mx_isspace(str[finish])){
-        finish --;
-    }
-    result = (char *)malloc(sizeof(char) * (finish - start));
-    for(int i = 0; i <= finish - start; i++){
-        result[i] = str[i+start];
-        result[i + 1] = '\0';
-    }
-    return result;
+	while (mx_isspace(*str) && len > 0) {
+		str++;
+		len--;
+	}
+	dst = mx_strnew(len);
+	mx_strncpy(dst, str, len);
+	return dst;
 }
-
-// int main() {
-//     char *name = "\f  My name... is Neo  \t\n ";
-//     char *res = mx_strtrim(name);
-//     printf("%s\n", res);
-//     //free(res);
-//     system("leaks a.out");
-//     return 0;
-// }

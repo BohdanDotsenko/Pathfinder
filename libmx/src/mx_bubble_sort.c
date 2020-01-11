@@ -1,7 +1,8 @@
-int mx_strcmp(const char *s1, const char *s2);
+#include "libmx.h"
 
 int mx_bubble_sort(char **arr, int size) {
-int counter = 0;
+	int counter = 0;
+
 	for (int i = 0; i < size; i++) {
 		for (int k = i + 1; k < size; k++) {
 			if (mx_strcmp(arr[i], arr[k]) > 0) {

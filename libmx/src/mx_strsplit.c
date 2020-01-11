@@ -1,42 +1,33 @@
-#include"libmx.h"
+#include "libmx.h"
 
-char **mx_strsplit(const char *s, char c) {
-    if (!s) {
-        return NULL;
-    }
-    int size_arr = mx_count_words(s, c);
-    int counter = 0;
-    char **result = malloc(sizeof(char *) * (size_arr + 1));
-    int len = mx_strlen(s);
-    int index = 0;
-    if (size_arr == 1) {
-        result[0] = mx_strdup(s);
-        result[1] = NULL;
-        return result;
-    }
-    for (int i = 0; i < len; i++) {
-        index = mx_get_char_index(s, c);
-        index = index == -1 ? mx_strlen(s) : index;
-        if (index) {
-            result[counter] = mx_strndup(s, index);
-            s += mx_strlen(result[counter]) - 1;
-            i += mx_strlen(result[counter]) - 1;
-            counter++;
-        }
-        s++;
-    } 
-    result[size_arr] = NULL;
-    return result;
+static int get_word_length(const char *s, char c) {
+	int word_length = 0;
+	char *copy_s = (char *)s;
+
+	while((*copy_s++ != c) && (*copy_s != '\0')) {
+		word_length++;
+	}
+	return word_length;
 }
 
-// int main() {
-//     char *s1 = "**Good bye,**Mr.*Anderson.****";
-//     char **arr1 = mx_strsplit(s1, '*');  // arr = ["Good bye,", "Mr.", "Anderson."]
-//     mx_print_strarr(arr1, " ");
-//     char *s2 = "     Knock, knock,    Neo.   ";
-//     char **arr2 = mx_strsplit(s2, ' ');  // arr = ["Knock,", "knock,", "Neo."]
-//     mx_print_strarr(arr2, " ");
- 
-//     return 0;
-// }
+char **mx_strsplit(const char *s, char c) {
+	int word_length = 0;
+	int i = 0;
+	char **arr = NULL;
 
+	if (!s)
+		return NULL;
+	arr = (char **)malloc((mx_count_words(s, c) + 1) * sizeof(char *));
+	while((*s) && (*s != '\0')) {
+		if (*s != c) {
+			word_length = get_word_length(s, c);
+			arr[i] = mx_strndup(s, word_length);
+			s += word_length;
+			i++;
+            continue;
+		}
+        s++;
+	}
+	arr[i] = NULL;
+	return arr;
+}

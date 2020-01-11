@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "libmx.h"
 
 void mx_strdel(char **str) {
-	free(str);
+	free(*str);
 	*str = NULL;
 }

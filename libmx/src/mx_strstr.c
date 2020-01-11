@@ -1,25 +1,18 @@
-#include"libmx.h"
+#include "libmx.h"
 
 char *mx_strstr(const char *haystack, const char *needle) {
-    const char *save_haystack = haystack;
-    int needle_length = mx_strlen(needle);
-    
-    if (!needle_length) {
-        return (char *) haystack;
-    }
-    for (int i = 0; i <= mx_strlen(save_haystack) - needle_length; i++) {
-        if (!mx_strncmp(haystack, needle, needle_length)) {
-            return (char *) haystack;
-        }
-        haystack++;
-    }
-
-    return NULL;
+	if (!needle)
+		return NULL;
+	if (mx_strlen(haystack) < mx_strlen(needle)) {
+		return NULL;
+	}
+	if (!mx_strlen(needle)) {
+		return (char *)haystack;
+	}
+	for (; (haystack = mx_strchr(haystack, needle[0])) != NULL; haystack++) {
+		if (mx_strncmp(haystack, needle, mx_strlen(needle)) == 0) {
+			return (char *)haystack;
+		}
+	}
+	return NULL;
 }
-
-// int main() {
-//     char *a = "abcdefg";
-//     char *b = "de";
-//     printf("%s", mx_strstr(a, b));
-//     return 0;
-// }

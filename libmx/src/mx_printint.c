@@ -1,19 +1,21 @@
-void mx_printchar(char c);
+#include "libmx.h"
 
 void mx_printint(int n) {
-	int long m = n;
-	int p = 1;
-	if (n < 0) {
-		mx_printchar('-');
-		m = -m;
+	if (n == -2147483648) {
+		mx_printint(-214748364);
+		mx_printchar(8 + '0');
 	}
-	while(p < m) {
-		p *= 10;
-	}
-	p /= 10;
-	while(p > 0) {
-		mx_printchar((m / p) + '0');
-		m %= p;
-		p /=10;
+	else {
+		if (n < 0) {
+			mx_printchar('-');
+			n *= -1;
+		}
+		if (n >= 0 && n <= 9)
+			mx_printchar(n + '0');
+		else
+		{
+			mx_printint(n / 10);
+			mx_printchar((n % 10) + '0');
+		}
 	}
 }

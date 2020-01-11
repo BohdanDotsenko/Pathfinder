@@ -1,42 +1,37 @@
 #include "libmx.h"
 
-char *mx_strnew(const int size);
-int mx_numlen(int num) {
-    int len = num < 0 ? 1 : 0;
-
-    while (num > 0 || -num > 0 || num == -2147483648) {
-        num /= 10;
-        len++;
-    }
-    return len == 0 ? 1 : len;
-}
+static int get_number_length(int number);
 
 char *mx_itoa(int number) {
-    int len = mx_numlen(number);
-    char *result = mx_strnew(len);
-    int min = 0;
+    int length = get_number_length(number);
+    char *str_integer = NULL;
 
-    if (number == -2147483648) {
-        result[0] = '-';
-        result[1] = '2';
-        min += 2;
-        number += 2000000000;
-        number *= -1;
+    if ((number != 0) && (number != -2147483648)) {
+        if (number < 0)
+            str_integer = mx_strnew(length + 1);
+        else
+            str_integer = mx_strnew(length);
+        for (int i = 0; i < length; i++) {
+            if (number < 0) {
+                str_integer[length] = '-';
+                number *= -1;
+            }
+            str_integer[i] = (number % 10) + 48;
+            number /= 10;
+        }
+        mx_str_reverse(str_integer);
+        return str_integer;
     }
-    else if (number < 0) {
-        result[0] = '-';
-        min++;
-        number *= -1;
-    }
-    for (int i = len - 1; i >= min; i--) {
-        result[i] = (number % 10) + '0';
-        number /= 10;
-    }
-    return result;
+    return (number == 0) ? mx_strdup("0") : mx_strdup("-2147483648");
 }
 
-// int main() {
-//     int a = 123;
-//     printf("%s", mx_itoa(a));
-//     return 0;
-// }
+static int get_number_length(int number) {
+    int length = 0;
+    int copy_number = number;
+
+    while (copy_number) {
+        length++;
+        copy_number /= 10;
+    }
+    return length;
+}
