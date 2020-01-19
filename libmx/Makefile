@@ -24,7 +24,7 @@ SRC	= 	    mx_printchar.c mx_strlen.c mx_printstr.c mx_printerr.c \
 		    mx_memrchr.c mx_memmem.c mx_memmove.c mx_isalpha.c mx_isdigit.c \
 		    mx_islower.c mx_isupper.c mx_create_node.c mx_push_front.c \
 		    mx_push_back.c mx_pop_front.c mx_pop_back.c mx_list_size.c \
-			mx_sort_list.c
+			mx_sort_list.c mx_strchr.c \
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

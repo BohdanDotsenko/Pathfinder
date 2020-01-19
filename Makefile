@@ -16,6 +16,8 @@ INCS	=	$(addprefix $(INCD)/, $(INC))
 
 SRC		= 	mx_check_empty_line.c mx_errors.c main.c \
 			mx_parse.c mx_arr.c mx_create_set.c mx_create_matrix.c \
+			mx_algo.c mx_printway.c mx_printerr_exit.c \
+			mx_check_spaces.c  mx_deyxtra.c  mx_free_memory.c \
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

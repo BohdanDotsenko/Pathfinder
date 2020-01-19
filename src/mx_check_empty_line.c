@@ -23,7 +23,7 @@ void mx_check_empty_line(char **lines, char *file) {
 		if (*fl == '\n' && *(fl+1) == '\n')
 			while(ln[i]) {
 				len = mx_strlen(ln[i]);
-				if (mx_strncmp(fl-len, ln[i], mx_strlen(ln[i])) == 0) 
+				if (mx_strncmp(fl-len, ln[i], mx_strlen(ln[i])) == 0)
 					mx_print_invalid(i+1);
 				i++;
 			}
